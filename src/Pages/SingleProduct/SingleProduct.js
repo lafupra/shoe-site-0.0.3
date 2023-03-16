@@ -74,7 +74,7 @@ const SingleProduct = () => {
   {product &&
   <div className="single-product-container">
   <div className="single-product-image">
-	  <img className="single-product-img"  src={product.thumbnailimageUrl} alt="Product Name"/>
+	  <img  width="200px" height="200px" className="single-product-img"  src={product.thumbnailimageUrl} alt="Product Name"/>
   </div>
   <div className="single-product-details">
 	  <h2>{product.name}</h2>
