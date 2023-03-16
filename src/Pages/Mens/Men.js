@@ -12,7 +12,7 @@ const getdata = async () => {
   try{
 
     const {data} = await axios.get(`${apiUrl}/product`)
-  console.log("we are here")
+ 
    setProducts(data);
     
   }catch(err){

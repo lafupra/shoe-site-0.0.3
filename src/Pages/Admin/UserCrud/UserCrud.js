@@ -9,23 +9,24 @@ const UserCrud = () => {
     const[users,setUsers] = useState([{}])
     const user = useSelector((state) => state.user.user)
 
-const getuserdata = async () => {
-    try{
-       
-        const res = await axios.get(`${apiUrl}/user?page=0&limit=10`,{headers:{
-            "token":user.token
-          }})
-        
-           setUsers(res.data)
-
-    }catch(err){
-        console.log(err)
-    }
-}
+    const getuserdata = async () => {
+      try{
+         
+          const res = await axios.get(`${apiUrl}/user?page=0&limit=10`,{headers:{
+              "token":user.token
+            }})
+          
+             setUsers(res.data)
+  
+      }catch(err){
+          console.log(err)
+      }
+  }
 
 useEffect(() => {
-    getuserdata()
-},[])
+
+getuserdata()
+})
 
 
 const handleDelete = async (id) => {
