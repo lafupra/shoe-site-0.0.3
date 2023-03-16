@@ -18,43 +18,12 @@ const [time,setTime] = useState("")
 
 
 
-const getorder = async () => {
-    const {data} = await axios.get(`${apiUrl}/order/${oid}`,{headers:{"token":user.token}})
-     
-    setOrderDetails(data)
-
-  
-
-}
 
 
 
 
-const convertdate = () => {
-        const newdate = new Date(orderDetails.createdAt) 
-        let date = JSON.stringify(newdate)
-        
-        date = date.slice(1,11)
-       
-        const originalDate = date;
-const parts = originalDate.split("-");
-const reversedDate = parts.reverse().join("-");
-        setDate(reversedDate)
-
-        const originalDateTime = newdate;
-        const dateObj = new Date(originalDateTime);
-        const formattedTime = dateObj.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
-        setTime(formattedTime);
-      
-       
-
-      
-        
-       
 
 
-}
- 
 
 
 
@@ -64,19 +33,54 @@ const reversedDate = parts.reverse().join("-");
 useEffect(() => {
 
  if(oid){
+  const getorder = async () => {
+    const {data} = await axios.get(`${apiUrl}/order/${oid}`,{headers:{"token":user.token}})
+     
+    setOrderDetails(data)
+
+  
+
+}
 
 
 getorder()
+
 }
 
 if(orderDetails){
+
+  const convertdate = () => {
+    const newdate = new Date(orderDetails.createdAt) 
+    let date = JSON.stringify(newdate)
+    
+    date = date.slice(1,11)
+   
+    const originalDate = date;
+const parts = originalDate.split("-");
+const reversedDate = parts.reverse().join("-");
+    setDate(reversedDate)
+
+    const originalDateTime = newdate;
+    const dateObj = new Date(originalDateTime);
+    const formattedTime = dateObj.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
+    setTime(formattedTime);
+  
+   
+
+  
+    
+   
+
+
+}
+
 
 convertdate()
 
 }
  
 
- },[oid,orderDetails.createdAt])
+ },[oid,orderDetails,user.token])
 
 
 

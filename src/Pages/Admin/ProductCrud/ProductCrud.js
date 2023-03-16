@@ -18,7 +18,7 @@ const ProductCrud = () => {
     const [brand,setBrand] = useState("")
     const [category,setCategory] = useState("")
     const [size,setSize] = useState(["xl"])
-    const [color,setColor] = useState("red")
+   
   
     const user = useSelector((state) => state.user.user)
     
@@ -131,7 +131,7 @@ const ProductCrud = () => {
         "brand": brand,
         "category": category,
         "price": price,
-        "color": color,
+        "color": "",
         "sizes": size,
         "imageUrls":imgUrls,
         "thumbnailimageUrl":thumbnailImgUrl
@@ -158,7 +158,7 @@ const ProductCrud = () => {
   
   
   
-           alert("product submited")
+          res && alert("product submited")
           
   
          }catch(err){
@@ -180,7 +180,7 @@ const ProductCrud = () => {
         "token": user.token
       }})
   
-     alert("product has been deleted")
+    deletedproduct && alert("product has been deleted")
   
       getdata()
       

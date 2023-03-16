@@ -28,7 +28,7 @@ const getorderdata = async () => {
 
 useEffect(() => {
     getorderdata()
-},[])
+})
 
 
 const handleDelete = async (oid) => {

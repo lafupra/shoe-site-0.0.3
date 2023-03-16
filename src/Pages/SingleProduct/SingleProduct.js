@@ -20,20 +20,22 @@ const SingleProduct = () => {
 	
 	
 	
-	const getdata = async () => { 
-		try{
-	  
-		  const {data} = await axios.get(`${apiUrl}/product/${pid}`)
-	  
-		 setProduct(data);
-		  
-		}catch(err){
-		  console.log(err)
-		}
-	  
-	   } 
+
 	  
 	   useEffect(() => {
+
+		const getdata = async () => { 
+			try{
+		  
+			  const {data} = await axios.get(`${apiUrl}/product/${pid}`)
+		  
+			 setProduct(data);
+			  
+			}catch(err){
+			  console.log(err)
+			}
+		  
+		   } 
 	  
 		getdata()
 	  
