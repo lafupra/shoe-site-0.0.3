@@ -1,0 +1,1 @@
+export const apiUrl = "https://shoe-store-api-nph9.onrender.com/api"

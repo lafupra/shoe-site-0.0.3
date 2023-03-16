@@ -1,0 +1,23 @@
+.print{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:0.6rem;
+    margin:1rem auto;
+    color:white;
+    background-color: rgb(173, 72, 72);
+    cursor:pointer
+    
+}
+
+.print:hover{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:0.6rem;
+    margin:1rem auto;
+    color:white;
+    background-color: rgb(182, 83, 83);
+    cursor:pointer
+    
+}

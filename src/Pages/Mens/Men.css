@@ -1,0 +1,154 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap");
+
+/* main container */
+.men-section{
+    display:flex;
+    gap:1rem;
+    width:80%;
+    margin-top: 1rem;;
+   
+
+}
+
+
+/* filter sidebar */
+
+
+
+.product-list-card {
+  width:25%;
+  display: flex;
+ flex-wrap:wrap ;
+  justify-content: space-between;
+  background-color: #f9f9f9;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.product-list-card-image {
+  flex: 50%;
+  margin-right: 20px;
+}
+
+
+
+  
+@media screen and (max-width:768px) {
+
+
+  .product-list-card{
+   
+   width:45%;
+  
+  
+
+  }
+
+  
+}
+
+
+@media screen and (max-width:400px) {
+
+
+  .product-list-card{
+   
+   width:100%;
+  
+  
+
+  }
+
+  
+}
+
+/* search section ends */
+
+.filter-menu {
+  flex:2;
+    width: 300px;
+    height:450px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .filter-menu h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .filter-menu h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .filter-category ul,
+  .filter-price ul,
+  .filter-color ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .filter-category li,
+  .filter-price li,
+  .filter-color li {
+    margin-bottom: 10px;
+  }
+  
+  .filter-category label,
+  .filter-price label,
+  .filter-color label {
+    font-size: 16px;
+  }
+  
+  .filter-button {
+    display: block;
+    margin-top: 20px;
+    background-color: #fa8c16;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .filter-button:hover {
+    background-color: #f17013;
+  }
+
+
+  /* men product section */
+
+.men-products{
+  flex:8;
+    display:flex;
+    gap:1rem;
+   flex-wrap:wrap;
+}
+
+
+/* mobile and tablet */
+
+@media screen and (max-width: 728px) {
+
+  .filter-menu {
+    display:none;
+
+      
+     }
+
+   
+
+
+
+  
+}
+
+
