@@ -8,24 +8,25 @@ const Men = () => {
 const [products,setProducts] = useState([])
 
 
-const getdata = async () => { 
-  try{
 
-    const {data} = await axios.get(`${apiUrl}/product`)
- 
-   setProducts(data);
-    
-  }catch(err){
-    console.log(err)
-  }
-
- } 
 
  useEffect(() => {
+  const getdata = async () => { 
+    try{
+  
+      const {data} = await axios.get(`${apiUrl}/product`)
+   
+     setProducts(data);
+      
+    }catch(err){
+      console.log(err)
+    }
+  
+   } 
 
   getdata()
 
- },[])
+ })
 
 
 
