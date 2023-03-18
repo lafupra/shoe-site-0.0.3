@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useCallback} from 'react'
 import {useLocation} from "react-router-dom"
 import axios from "axios"
 import { useSelector } from 'react-redux'
@@ -18,8 +18,38 @@ const [time,setTime] = useState("")
 
 
 
+console.log("render")
+
+const getorder = useCallback(async () => {
+  const {data} = await axios.get(`${apiUrl}/order/${oid}`,{headers:{"token":user.token}})
+   
+  setOrderDetails(data)
 
 
+
+},[oid,user.token])
+
+
+const convertdate = useCallback(() => {
+  const newdate = new Date(orderDetails.createdAt) 
+  let date = JSON.stringify(newdate)
+  
+  date = date.slice(1,11)
+ 
+  const originalDate = date;
+const parts = originalDate.split("-");
+const reversedDate = parts.reverse().join("-");
+  setDate(reversedDate)
+
+  const originalDateTime = newdate;
+  const dateObj = new Date(originalDateTime);
+  const formattedTime = dateObj.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
+  setTime(formattedTime);
+
+
+
+
+},[orderDetails.createdAt])
 
 
 
@@ -32,55 +62,13 @@ const [time,setTime] = useState("")
 
 useEffect(() => {
 
- if(oid){
-  const getorder = async () => {
-    const {data} = await axios.get(`${apiUrl}/order/${oid}`,{headers:{"token":user.token}})
-     
-    setOrderDetails(data)
-
-  
-
-}
-
 
 getorder()
 
-}
-
-if(orderDetails){
-
-  const convertdate = () => {
-    const newdate = new Date(orderDetails.createdAt) 
-    let date = JSON.stringify(newdate)
-    
-    date = date.slice(1,11)
-   
-    const originalDate = date;
-const parts = originalDate.split("-");
-const reversedDate = parts.reverse().join("-");
-    setDate(reversedDate)
-
-    const originalDateTime = newdate;
-    const dateObj = new Date(originalDateTime);
-    const formattedTime = dateObj.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
-    setTime(formattedTime);
-  
-   
-
-  
-    
-   
-
-
-}
-
-
 convertdate()
 
-}
- 
 
- },[oid,orderDetails,user.token])
+ },[getorder,convertdate])
 
 
 

@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useCallback} from 'react'
 import axios from "axios"
 import "./UserCrud.css"
 import { useSelector } from 'react-redux'
@@ -8,8 +8,9 @@ const UserCrud = () => {
 
     const[users,setUsers] = useState([{}])
     const user = useSelector((state) => state.user.user)
+    console.log("render")
 
-    const getuserdata = async () => {
+    const getuserdata = useCallback(async () => {
       try{
          
           const res = await axios.get(`${apiUrl}/user?page=0&limit=10`,{headers:{
@@ -21,12 +22,13 @@ const UserCrud = () => {
       }catch(err){
           console.log(err)
       }
-  }
+  },[user.token])
 
 useEffect(() => {
 
 getuserdata()
-})
+
+},[getuserdata])
 
 
 const handleDelete = async (id) => {
@@ -61,7 +63,7 @@ const handleDelete = async (id) => {
       </thead>
       <tbody>
         {users && users.map((user,i) => (
-          <tr key={user._id}>
+          <tr key={i}>
           <td>  {i + 1}</td>
           
   

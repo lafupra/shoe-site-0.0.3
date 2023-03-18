@@ -7,9 +7,20 @@ const MenCard = ({item}) => {
   const handleLinkClick = () => {
 		window.scrollTo(0, 0);
 	  };
+
   return (
     <>
-   <div className="product-list-card">
+  {!item ? <div className="product-list-card">
+  <div className="product-list-card-image">
+ <img width="200px" height="200px" style={{backgroundColor:"gray"}} src="#" alt="Professional Shoe"/>
+  </div>
+  <div className="product-list-card-details">
+    <h3 className="product-list-card-title">name</h3>
+    <p className="product-list-card-price">₹ </p>
+    <p className="product-list-card-description"> </p>
+  <button className="product-list-card-button">Add to Cart</button>
+  </div>
+</div> : <div className="product-list-card">
   <div className="product-list-card-image">
   <Link to={`/singleproduct/${item._id}`} onClick={handleLinkClick}> <img width="200px" height="200px" src={item.thumbnailimageUrl} alt="Professional Shoe"/></Link>
   </div>
@@ -19,7 +30,7 @@ const MenCard = ({item}) => {
     <p className="product-list-card-description"> {item.description}</p>
     <Link to={`/singleproduct/${item._id}`} onClick={handleLinkClick}> <button className="product-list-card-button">Add to Cart</button></Link>
   </div>
-</div>
+</div>} 
     </>
   )
 }

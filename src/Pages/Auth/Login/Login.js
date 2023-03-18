@@ -17,7 +17,7 @@ const Login = () => {
   //  const state = useSelector(state => state.user)
   
 
- 
+ console.log("render")
   
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -36,6 +36,7 @@ console.log(cart)
 
     }catch(err){
       console.log(err)
+      alert("some error occoured")
     }
 
   

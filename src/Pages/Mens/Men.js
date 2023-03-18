@@ -1,4 +1,4 @@
-import React,{useState,useEffect}from 'react'
+import React,{useState,useEffect,useCallback}from 'react'
 import "./Men.css"
 import MenCard from './MenCard/MenCard'
 import axios from "axios"
@@ -6,27 +6,40 @@ import { apiUrl } from '../../Data'
 
 const Men = () => {
 const [products,setProducts] = useState([])
+const [loading,setLoading] = useState(false)
 
 
+console.log("render")
+
+const getdata =  useCallback( async () => { 
+
+  try{
+   
+
+     
+
+   setLoading(true)
+  
+    const {data} = await axios.get(`${apiUrl}/product`)
+   
+   setProducts(data);
+
+   setLoading(false)
+   
+    
+  }catch(err){
+    console.log(err)
+  }
+
+ },[])
 
 
  useEffect(() => {
-  const getdata = async () => { 
-    try{
-  
-      const {data} = await axios.get(`${apiUrl}/product`)
-   
-     setProducts(data);
-      
-    }catch(err){
-      console.log(err)
-    }
-  
-   } 
+
 
   getdata()
 
- })
+ },[getdata])
 
 
 
@@ -64,10 +77,19 @@ const [products,setProducts] = useState([])
 
 {/* product section */}
 
-<div className="men-products">
-    {products?.map((item) => (
+ <div className="men-products">
+  
+  {loading ?   <div className="spinner-container">
+      <div className="loading-spinner">
+      </div>
+    </div> :<> {products?.map((item) => (
       <MenCard key = {item._id} item = {item} />
-    ) )} 
+    ) )}  </> }  
+
+
+    
+  
+  
     
 </div>
 

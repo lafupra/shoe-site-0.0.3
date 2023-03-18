@@ -19,6 +19,7 @@ const ProductCrud = () => {
     const [category,setCategory] = useState("")
     const [size,setSize] = useState(["xl"])
    
+    console.log("render")
   
     const user = useSelector((state) => state.user.user)
     

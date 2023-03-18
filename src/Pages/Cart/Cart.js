@@ -22,6 +22,7 @@ const Cart = () => {
     total = total + subtotal
 
   }
+  console.log("render")
  
   
   return (

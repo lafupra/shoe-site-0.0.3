@@ -1,4 +1,4 @@
-import React,{useState,useEffect}from 'react'
+import React,{useState,useEffect,useCallback}from 'react'
 import "./OrderCrud.css"
 import axios from "axios"
 import { useSelector } from 'react-redux'
@@ -9,26 +9,29 @@ import { apiUrl } from '../../../Data'
 
 const OrderCrud = () => {
     const[orders,setOrders] = useState([{}])
+    const [loading,setLoading] = useState(false)
     const user = useSelector((state) => state.user.user)
     const navigate = useNavigate()
+    console.log("render")
 
-const getorderdata = async () => {
+const getorderdata = useCallback(async () => {
     try{
-       
+        setLoading(true)
         const res = await axios.get(`${apiUrl}/order`,{headers:{
             "token":user.token
           }})
         
            setOrders(res.data)
+           setLoading(false)
 
     }catch(err){
         console.log(err)
     }
-}
+},[user.token])
 
 useEffect(() => {
     getorderdata()
-})
+},[getorderdata])
 
 
 const handleDelete = async (oid) => {
@@ -61,6 +64,12 @@ const handleOrder = async (oid) => {
   return (
     <>
     <div className="users">
+    {loading && 
+     <div className="spinner-container">
+   <div className="loading-spinner">
+    </div>
+   </div>
+  }
     <table className="product-table">
       <thead>
         <tr>
@@ -74,7 +83,8 @@ const handleOrder = async (oid) => {
         </tr>
       </thead>
       <tbody>
-        {orders && orders.map((order,i) => (
+  
+ { orders.map((order,i) => (
           <tr key={i}>
           <td>{i + 1}</td>
           
@@ -84,11 +94,13 @@ const handleOrder = async (oid) => {
   <td>{order.total}</td>
   {order.paymentStatus ? <td> "payment checked" </td> : <td> "payment not checked" </td>}
   {order.deliveryStatus ? <td> "delivered" </td> : <td> "not delivered" </td>}
+        
   
+
+
         
  
-          
-            
+      
             <td>
               <button className="delete-btn" onClick={() => handleDelete(order._id)}>Delete</button>
               <button className="delete-btn" onClick={() => handleOrder(order._id)}>Get Details</button>
