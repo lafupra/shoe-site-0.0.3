@@ -1,6 +1,7 @@
 .single-product-container{
 	display: flex;
     width:50%;
+	
     margin:0 auto;
 	padding: 20px;
 	
@@ -78,6 +79,9 @@ select {
 	border-top: 10px solid #383636; /* Black */
 	border-radius: 50%;
 	animation: spinner 1.5s linear infinite;
+  }
+  .spinner-container{
+	margin:0 auto;
   }
 
 

@@ -44,7 +44,7 @@ const Order = () => {
           {item.name}
          </div>
          <div className="order-table-item">
-             {item.qauntity}
+             {item.quantity}
          </div>
          <div className="order-table-item">
              {item.subtotal}

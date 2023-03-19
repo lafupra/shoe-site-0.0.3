@@ -8,16 +8,18 @@ const UserCrud = () => {
 
     const[users,setUsers] = useState([{}])
     const user = useSelector((state) => state.user.user)
+    const [loading,setLoading] = useState(false)
     console.log("render")
 
     const getuserdata = useCallback(async () => {
       try{
-         
+         setLoading(true)
           const res = await axios.get(`${apiUrl}/user?page=0&limit=10`,{headers:{
               "token":user.token
             }})
           
              setUsers(res.data)
+             setLoading(false)
   
       }catch(err){
           console.log(err)
@@ -50,18 +52,25 @@ const handleDelete = async (id) => {
     
   return (
     <>
+        {loading && 
+     <div className="spinner-container">
+   <div className="loading-spinner">
+    </div>
+   </div>
+  }
     <div className="users">
-    <table className="product-table">
+
+    <table className="product-table1">
       <thead>
         <tr>
-        <th>no.</th>
+        <th className="head1">no.</th>
          
           <th>Name</th>
           <th>Email</th>
           <th>Action</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody className="tablebody">
         {users && users.map((user,i) => (
           <tr key={i}>
           <td>  {i + 1}</td>

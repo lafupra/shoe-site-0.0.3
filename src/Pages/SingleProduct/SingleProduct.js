@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useCallback} from 'react'
 import "./SingleProduct.css"
 import {Link,useLocation} from "react-router-dom"
 import axios from "axios"
@@ -17,30 +17,37 @@ const SingleProduct = () => {
 	const cartproducts = useSelector(state => state.user.cart.products)
 	const cart = useSelector(state => state.user.cart)
 	const user = useSelector(state=> state.user.user)
+	const [loading,setLoading] = useState(false)
 	
 	
 	
 	console.log("render")
 
+	const getdata = useCallback(async () => { 
+		try{
+
+			setLoading(true)
+	
+		  const {data} = await axios.get(`${apiUrl}/product/${pid}`)
+	  
+		 setProduct(data);
+
+		 setLoading(false)
+		 
+		}catch(err){
+		  console.log(err)
+		}
+	  
+	   },[pid])
+
 	  
 	   useEffect(() => {
 
-		const getdata = async () => { 
-			try{
-		
-			  const {data} = await axios.get(`${apiUrl}/product/${pid}`)
-		  
-			 setProduct(data);
-			 
-			}catch(err){
-			  console.log(err)
-			}
-		  
-		   } 
+	
 	  
 		getdata()
 	  
-	   },[pid])
+	   },[pid,getdata])
 
 	//    add to cart
 
@@ -72,6 +79,11 @@ const SingleProduct = () => {
 
   return (
     <>
+
+{loading &&  <div className="spinner-container">
+      <div className="loading-spinner">
+      </div>
+    </div>}
 
   {product &&
   <div className="single-product-container">

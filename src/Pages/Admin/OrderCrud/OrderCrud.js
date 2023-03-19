@@ -63,17 +63,19 @@ const handleOrder = async (oid) => {
     
   return (
     <>
-    <div className="users">
-    {loading && 
+       {loading && 
      <div className="spinner-container">
    <div className="loading-spinner">
     </div>
    </div>
   }
+    <div className="users">
+ 
     <table className="product-table">
+ 
       <thead>
         <tr>
-        <th>no.</th>
+        <th className='head'>no.</th>
          
           <th>userId</th>
           <th>total</th>

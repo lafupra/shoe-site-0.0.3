@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useCallback} from 'react'
 import axios from "axios"
 import "./ProductCrud.css"
 import {useSelector} from "react-redux"
@@ -18,23 +18,27 @@ const ProductCrud = () => {
     const [brand,setBrand] = useState("")
     const [category,setCategory] = useState("")
     const [size,setSize] = useState(["xl"])
+    const [loading,setLoading] = useState(false)
    
     console.log("render")
   
     const user = useSelector((state) => state.user.user)
     
-    const getdata = async () => { 
+    const getdata = useCallback(async () => { 
       try{
+
+        setLoading(true)
   
         const {data} = await axios.get(`${apiUrl}/product`)
   
        setProducts(data);
+        setLoading(false)
         
       }catch(err){
         console.log(err)
       }
   
-     } 
+     },[])
   
   
     useEffect(() => {
@@ -43,7 +47,7 @@ const ProductCrud = () => {
   
      getdata()
        
-    }, []);
+    }, [getdata]);
   
   
     // upload images
@@ -308,6 +312,13 @@ const ProductCrud = () => {
       
       <button type="submit" className="add-product-btn">Add Product</button>
     </form>
+
+    {loading && 
+     <div className="spinner-container">
+   <div className="loading-spinner">
+    </div>
+   </div>
+  }
     <table className="product-table">
       <thead>
         <tr>

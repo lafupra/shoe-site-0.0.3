@@ -13,7 +13,7 @@ console.log(item)
  <div className="product-list-card">
  
   <div className="product-list-card-image">
-  <Link to={`/singleproduct/${item._id}`} onClick={handleLinkClick}>  <img src={item.thumbnailimageUrl} alt="Professional Shoe"/> </Link>
+  <Link to={`/singleproduct/${item._id}`} onClick={handleLinkClick}>  <img  src={item.thumbnailimageUrl} alt="Professional Shoe"/> </Link>
   </div>
   
   <div className="product-list-card-details">
@@ -22,6 +22,7 @@ console.log(item)
     <p className="product-list-card-description"> {item?.description}</p>
     <Link to={`/singleproduct/${item._id}`} onClick={handleLinkClick}> <button className="product-list-card-button">Add to Cart</button></Link>
   </div>
+
 </div>
     </>
   )

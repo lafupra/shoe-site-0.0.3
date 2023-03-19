@@ -55,6 +55,7 @@
 
 .filter-menu {
   flex:2;
+  max-width:15rem;
     height:450px;
     background-color: #fff;
     padding: 20px;
@@ -114,7 +115,7 @@
 .men-products{
   flex:8;
     display:flex;
-    justify-content: space-between;
+    justify-content: space-around;
     gap:1rem;
     padding:1rem;
    flex-wrap:wrap;

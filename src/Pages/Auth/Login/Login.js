@@ -2,7 +2,7 @@ import {useState} from "react"
 import { loginTable } from "./LoginStyle";
 import {useNavigate} from "react-router-dom"
 import axios from "axios"
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import {submituser} from "../../../Redux/userRedux"
 import { apiUrl } from "../../../Data";
 
@@ -12,8 +12,7 @@ const Login = () => {
    const [loginUser,setLoginUser] = useState({})
    const navigate = useNavigate()
    const dispatch = useDispatch()
-   const user = useSelector(state => state.user.user)
-   const cart = useSelector(state => state.user.cart)
+
   //  const state = useSelector(state => state.user)
   
 
@@ -28,10 +27,8 @@ if(!res) {  console.log("not authorised")}
      setLoginUser(res.data)
      dispatch(submituser(res.data))
 
-console.log(user)
-console.log(cart)
 
-
+alert("login succesfully")
    navigate("/")
 
     }catch(err){
