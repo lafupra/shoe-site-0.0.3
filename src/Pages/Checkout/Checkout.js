@@ -3,18 +3,70 @@ import "./Checkout.css"
 import Order from "./Order/Order"
 import Barcode from './Barcode/Barcode'
 import { apiUrl } from '../../Data'
-import {useNavigate} from "react-router-dom"
+import { testUrl } from '../../Data'
 import {useSelector} from "react-redux"
 import axios from "axios"
+import "./Razorpay.scss"
 
 const CheckOut = () => {
   const [orderDetails,setOrderDetails] = useState({})
-  const navigate = useNavigate()
   const cart = useSelector(state => state.user.cart)
   const user = useSelector(state => state.user.user)
 
  
-  
+  //  razorpay checkouthandler
+
+  const checkoutHandler = async () => {
+
+    const oid = await submitOrder()
+
+    console.log(oid)
+
+
+   const order = await axios.post(`${testUrl}/checkout`,{amount:cart.total})
+
+ console.log(order)
+
+
+   const options = {
+       "key": "rzp_test_OGZVnuLfuiNS98", // Enter the Key ID generated from the Dashboard
+       "amount": order.data.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+       "currency": "INR",
+       "name": user.name,
+       "description": "Test Transaction",
+       "image": "https://example.com/your_logo",
+       "order_id": order.data.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+       "callback_url": `${testUrl}/verification/${oid}`,
+       // "handler": function (response){
+       //     alert(response.razorpay_payment_id);
+       //     alert(response.razorpay_order_id);
+       //     alert(response.razorpay_signature)
+           
+
+           
+       // },
+       "prefill": {
+           "name": user.name,
+           "email": user.email,
+           "contact": "9000090000"
+       },
+       "notes": {
+           "address": orderDetails.address
+       },
+       "theme": {
+           "color": "#3399cc"
+       }
+   };
+
+   if(oid !== undefined) {
+     const razor = new window.Razorpay(options) 
+    razor.open()
+
+
+   } else{
+     alert("oid is undefined")
+   }
+}
 
 
 const handleOrderDetails = (e) => {
@@ -26,25 +78,29 @@ const handleOrderDetails = (e) => {
 }
 
 
-  const submitOrder = async (e) => {
-    e.preventDefault()
+  const submitOrder = async () => {
+
+  
+
   try{
    const orderdata = {products:cart.products,userId:cart.userId,total:cart.total,...orderDetails}
-    const ordersubmit = await axios.post(`${apiUrl}/order/add`,orderdata,{
+    const ordersubmit = await axios.post(`${testUrl}/order/add`,orderdata,{
       headers:{
         "token":user.token
        }
     })
-    console.log(ordersubmit)
+
+  
+   
+    const orderid = ordersubmit.data._id
+
+
+    return orderid
    
     
    
 
-    alert("Order Succesfull")
 
-
-
-    navigate(`/receipt/${ordersubmit.data._id}`)
   
 
   }catch(err){
@@ -91,6 +147,12 @@ const handleOrderDetails = (e) => {
   
   <button onClick={submitOrder} className="checkout-button red">Place Order</button>
 
+{/* razorpay */}
+
+<div className="razorpay">
+  <h1> Pay With The Razorpay</h1>
+  <div className="paymentbtn"  onClick={checkoutHandler}>Use Razor pay</div>
+</div>
 
 </div>
    </>

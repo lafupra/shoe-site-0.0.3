@@ -3,6 +3,7 @@ import "./Men.css"
 import MenCard from './MenCard/MenCard'
 import axios from "axios"
 import { apiUrl } from '../../Data'
+import { testProducts } from '../../Data'
 
 const Men = () => {
 const [products,setProducts] = useState([])
@@ -79,10 +80,14 @@ const getdata =  useCallback( async () => {
 
  <div className="men-products">
   
-  {loading ?   <div className="spinner-container">
+  {loading ? <> {testProducts?.map((item) => (
+      <MenCard key = {item._id} item = {item} />
+    ) )}  <div className="spinner-container">
       <div className="loading-spinner">
       </div>
-    </div> :<> {products?.map((item) => (
+     
+    </div>
+    </>   :<> {products?.map((item) => (
       <MenCard key = {item._id} item = {item} />
     ) )}  </> }  
 
