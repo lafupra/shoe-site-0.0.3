@@ -16,7 +16,8 @@ import Receipt from "./Pages/Receipt/Receipt"
 import OrderCrud from "./Pages/Admin/OrderCrud/OrderCrud"
 import PrintReceipt from "./Pages/Receipt/PrintReceipt"
 import PaymentSuccess from "./Pages/PaymentStatus/PaymentSuccess/PaymentSuccess"
-import PaymentFailer from "./Pages/PaymentStatus/Paymentfailure/PaymentFailer"
+import PaymentFailure from "./Pages/PaymentStatus/PaymentFailure/PaymentFailure"
+
 
 
 
@@ -52,7 +53,7 @@ function App() {
         <Route path="/admin/order" element={<OrderCrud/>}/>
         <Route path="/receipt/:oid" element={<PrintReceipt/>}/>
         <Route path="/paymentsuccess" element={<PaymentSuccess/>}/>
-        <Route path="/paymentfailer" element={<PaymentFailer/>}/>
+        <Route path="/paymentfailure" element={<PaymentFailure/>}/>
        
        
        

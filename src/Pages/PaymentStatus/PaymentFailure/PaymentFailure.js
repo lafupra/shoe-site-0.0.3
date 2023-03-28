@@ -1,8 +1,8 @@
 import React from 'react'
-import "./PaymentFailer.scss"
+import "./PaymentFailure.scss"
 import {Link} from "react-router-dom"
 
-const PaymentFailer = () => {
+const PaymentFailure = () => {
   return (
 <>
 <section className="paymentFailer">
@@ -15,4 +15,4 @@ const PaymentFailer = () => {
   )
 }
 
-export default PaymentFailer
+export default PaymentFailure
