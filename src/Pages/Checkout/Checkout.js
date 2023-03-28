@@ -3,21 +3,24 @@ import "./Checkout.css"
 import Order from "./Order/Order"
 import Barcode from './Barcode/Barcode'
 import { apiUrl } from '../../Data'
-
+import { useNavigate } from 'react-router-dom'
 import {useSelector} from "react-redux"
 import axios from "axios"
 import "./Razorpay.scss"
 
 const CheckOut = () => {
   const [orderDetails,setOrderDetails] = useState({})
+  const [loading,setLoading] = useState(false)
   const cart = useSelector(state => state.user.cart)
   const user = useSelector(state => state.user.user)
+  const navigate = useNavigate()
 
  
   //  razorpay checkouthandler
 
   const checkoutHandler = async () => {
-
+  
+    setLoading(true)
     const oid = await submitOrder()
 
     console.log(oid)
@@ -25,7 +28,7 @@ const CheckOut = () => {
 
    const order = await axios.post(`${apiUrl}/checkout`,{amount:cart.total})
 
- console.log(order)
+ 
 
 
    const options = {
@@ -36,15 +39,34 @@ const CheckOut = () => {
        "description": "Test Transaction",
        "image": "https://example.com/your_logo",
        "order_id": order.data.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-       "callback_url": `${apiUrl}/verification/${oid}`,
-       // "handler": function (response){
-       //     alert(response.razorpay_payment_id);
-       //     alert(response.razorpay_order_id);
-       //     alert(response.razorpay_signature)
+      //  "callback_url": `${apiUrl}/verification/${oid}`,
+       "handler": async (response) => {
+
+        if(response){
+           
+         
+
+          alert(response.razorpay_payment_id);
+            const auth = await axios.post(`${apiUrl}/verification/${oid}`,response)
+            if(auth.status === 200){
+              alert("auth succesfull")
+              navigate(`/paymentsuccess/${auth.data.razorpay_payment_id}`)
+
+            }else{
+              alert("auth failed")
+              navigate("/paymentfailure")
+            }
+         
+
+        }else{
+          alert("payment failed")
+          navigate("/paymentfailure")
+        }
+           
            
 
            
-       // },
+       },
        "prefill": {
            "name": user.name,
            "email": user.email,
@@ -60,7 +82,10 @@ const CheckOut = () => {
 
    if(oid !== undefined) {
      const razor = new window.Razorpay(options) 
-    razor.open()
+     setLoading(false)
+     razor.open()
+
+    
 
 
    } else{
@@ -76,6 +101,9 @@ const handleOrderDetails = (e) => {
   })
 
 }
+
+
+// making order
 
 
   const submitOrder = async () => {
@@ -135,23 +163,20 @@ const handleOrderDetails = (e) => {
       <label className="form-label" for="zip">Zip Code:</label>
       <input  onChange={handleOrderDetails} className="form-input" type="number" name="zipCode"  required/>
     </div>
-    <div className="form-group">
-      <label className="form-label" for="zip">Upi Ref No:</label>
-      <input  onChange={handleOrderDetails} className="form-input" type="text" name="upiRefNo" required/>
-    </div>
-
-    
-  
-        
   </form>
   
-  <button onClick={submitOrder} className="checkout-button red">Place Order</button>
+ 
 
 {/* razorpay */}
 
 <div className="razorpay">
   <h1> Pay With The Razorpay</h1>
-  <div className="paymentbtn"  onClick={checkoutHandler}>Use Razor pay</div>
+  {loading && <div className="spinner-container">
+      <div className="loading-spinner">
+      </div>
+     
+    </div> }
+  <div className="paymentbtn"  onClick={checkoutHandler}>{loading ? "loading" : "Use Razor pay"}</div>
 </div>
 
 </div>

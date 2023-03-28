@@ -51,7 +51,7 @@ function App() {
         <Route path="/receipt" element={<Receipt/>}/>
         <Route path="/admin/order" element={<OrderCrud/>}/>
         <Route path="/receipt/:oid" element={<PrintReceipt/>}/>
-        <Route path="/paymentsuccess" element={<PaymentSuccess/>}/>
+        <Route path="/paymentsuccess/:payid" element={<PaymentSuccess/>}/>
         <Route path="/paymentfailure" element={<PaymentFailure/>}/>
        
        
