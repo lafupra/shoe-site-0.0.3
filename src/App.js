@@ -48,7 +48,6 @@ function App() {
         <Route path="/Register" element={<Register/>}/>
         <Route path="/admin/product" element={<ProductCrud/>}/>
         <Route path="/admin/user" element={<UserCrud/>}/>
-        {/* <Route path="/receipt/:oid" element={<Receipt/>}/> */}
         <Route path="/receipt" element={<Receipt/>}/>
         <Route path="/admin/order" element={<OrderCrud/>}/>
         <Route path="/receipt/:oid" element={<PrintReceipt/>}/>
