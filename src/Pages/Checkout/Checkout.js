@@ -3,7 +3,7 @@ import "./Checkout.css"
 import Order from "./Order/Order"
 import Barcode from './Barcode/Barcode'
 import { apiUrl } from '../../Data'
-import { testUrl } from '../../Data'
+
 import {useSelector} from "react-redux"
 import axios from "axios"
 import "./Razorpay.scss"
@@ -23,7 +23,7 @@ const CheckOut = () => {
     console.log(oid)
 
 
-   const order = await axios.post(`${testUrl}/checkout`,{amount:cart.total})
+   const order = await axios.post(`${apiUrl}/checkout`,{amount:cart.total})
 
  console.log(order)
 
@@ -36,7 +36,7 @@ const CheckOut = () => {
        "description": "Test Transaction",
        "image": "https://example.com/your_logo",
        "order_id": order.data.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-       "callback_url": `${testUrl}/verification/${oid}`,
+       "callback_url": `${apiUrl}/verification/${oid}`,
        // "handler": function (response){
        //     alert(response.razorpay_payment_id);
        //     alert(response.razorpay_order_id);
@@ -84,7 +84,7 @@ const handleOrderDetails = (e) => {
 
   try{
    const orderdata = {products:cart.products,userId:cart.userId,total:cart.total,...orderDetails}
-    const ordersubmit = await axios.post(`${testUrl}/order/add`,orderdata,{
+    const ordersubmit = await axios.post(`${apiUrl}/order/add`,orderdata,{
       headers:{
         "token":user.token
        }
