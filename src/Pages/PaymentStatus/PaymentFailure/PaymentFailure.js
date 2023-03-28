@@ -1,5 +1,5 @@
 import React from 'react'
-import "./PaymentFailure.scss"
+// import "./PaymentFailure.scss"
 import {Link} from "react-router-dom"
 
 const PaymentFailure = () => {

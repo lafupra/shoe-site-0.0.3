@@ -1,5 +1,5 @@
 import React from 'react'
-import "./PaymentSuccess.scss"
+// import "./PaymentSuccess.scss"
 
 const PaymentSuccess = () => {
   return (
