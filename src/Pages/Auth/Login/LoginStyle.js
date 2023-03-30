@@ -3,7 +3,8 @@
     main:{
         marginLeft:"30%",
          width:"100%",
-         marginTop:"10px"
+         marginTop:"10px",
+      
     },
     heading:{
         width:"50%",
@@ -25,7 +26,7 @@
     loginBtn:{
         width:"50%",
          textAlign:"center",
-         margin:"1rem auto",
+         margin:"1rem",
          color:"white",
          fontWeight:"550",
          fontSize:"1.1rem"

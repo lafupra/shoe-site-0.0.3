@@ -88,8 +88,8 @@ alert("login succesfully")
   </div>
   <button onClick={handleSubmit} type="submit"style={loginTable.loginBtn}>Login</button> <br/>
   
- <Link to={"/register"}><button type="submit"style={loginTable.loginBtn}>Register</button></Link>
-
+ 
+  <Link to={"/register"}><button type="submit"style={loginTable.loginBtn}>Register</button></Link>
 </div>
 
 
