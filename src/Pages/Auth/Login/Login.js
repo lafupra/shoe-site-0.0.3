@@ -5,6 +5,7 @@ import axios from "axios"
 import { useDispatch} from "react-redux";
 import {submituser} from "../../../Redux/userRedux"
 import { apiUrl } from "../../../Data";
+import {Link} from "react-router-dom"
 
 
 const Login = () => {
@@ -85,7 +86,9 @@ alert("login succesfully")
     <input type="checkbox"  style={loginTable.check} />
     <label >Remember Me</label>
   </div>
-  <button onClick={handleSubmit} type="submit"style={loginTable.loginBtn}>Login</button>
+  <button onClick={handleSubmit} type="submit"style={loginTable.loginBtn}>Login</button> <br/>
+  
+ <Link to={"/register"}><button type="submit"style={loginTable.loginBtn}>Register</button></Link>
 
 </div>
 

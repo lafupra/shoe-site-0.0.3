@@ -24,7 +24,9 @@
     },
     loginBtn:{
         width:"50%",
-         textAlign:"center"
+         textAlign:"center",
+         color:"white",
+         fontSize:"1.1rem"
         
 
     }
